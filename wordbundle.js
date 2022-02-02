@@ -22,11 +22,12 @@ class Wordbundle{
 
     init(){
         let counter = 0;
-        this.posList.slice().forEach(element => {
-            this.posWords.push(new WordProp(element, originX + (counter % 3) * 79, height + 50));
-            counter++;
-        });
+        let allWords = this.posList.slice();
         this.list.slice().forEach(element => {
+            allWords.push(element);
+        })
+        allWords = allWords.sort();
+        allWords.slice().forEach(element => {
             this.posWords.push(new WordProp(element, originX + (counter % 3) * 79, height + 50));
             counter++;
         });

@@ -16,7 +16,7 @@
     <style>
         body {
             margin: 1;
-            padding: 1;
+            padding: auto;
         }
         canvas {
             margin: auto;
@@ -26,6 +26,11 @@
 
         * {
             touch-action: manipulation;
+        }
+
+        .blocktext{
+            margin-left: 150px;
+            width: 20em;
         }
 
     </style>
@@ -44,7 +49,9 @@
         }, { passive: false });
     </script>
 </head>
-<body>
-    
+<body> 
+    <div class="blocktext">
+        <h1>WORDLE SOLVER</h1>
+    </div>
 </body>
 </html>
