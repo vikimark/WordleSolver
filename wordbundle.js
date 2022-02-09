@@ -19,10 +19,16 @@ class Wordbundle{
     }
 
     init(){
-        this.posWords = (this.posList.slice());
-        this.list.slice().forEach(element => {
-            this.posWords.push(element);
+        this.posList.slice().forEach(element => {
+            this.posWords.push(new WordProp(element));
         });
+        this.list.slice().forEach(element => {
+            this.posWords.push(new WordProp(element));
+        });
+        // this.posWords = (this.posList.slice());
+        // this.list.slice().forEach(element => {
+        //     this.posWords.push(element);
+        // });
 
         this.wordboxes = [];
         for(let i=0; i<this.nRow; i++){
@@ -37,19 +43,56 @@ class Wordbundle{
 
         if(this.notWord){
             fill(0);
+            noStroke();
             text("not a word", screenWidth/2, screenHeight/2);
         }
 
         if(this.showPosWords){
             fill(0);
-            text(this.txtPosWords, 3 * screenWidth / 4, 1 * screenHeight / 10);
+            noStroke();
+            // text(this.txtPosWords, 74 * screenWidth / 100, 1 * screenHeight / 10);
+            this.posWords.forEach(element => {
+                element.update();
+                element.display();
+            });
+        }
+    }
+    set_position_word(wordprops){
+        let x = 60 * screenWidth / 100;
+        let y = 1 * screenHeight / 10;
+
+        // iterate over each word
+        for(let i=0; i<wordprops.length; i++){
+            let word = wordprops[i];
+            let wordWidth = textWidth(word.value);
+            word.tx = x;
+            word.ty = y;
+            word.idx = i;
+            // console.log("before : (x, y) : " + x + " " + y);
+            x += wordWidth + textWidth("  ");
+            // console.log("after : (x, y) : " + x + " " + y);
+
+            // look ahead the next word -> will it fit in the space? if not, line break
+            let nextWordWidth;
+            if(i+1 < wordprops.length){
+            nextWordWidth = textWidth(wordprops[i+1].value)
+            }else nextWordWidth = 0;
+            if(x > screenWidth - nextWordWidth){
+                y += 25 // line height, change later
+                x = 60 * screenWidth / 100;
+            }
         }
     }
 
     get_posWordsTxt(){
         this.txtPosWords = "";
+        let counter = 0;
         this.posWords.forEach(element => {
-            this.txtPosWords += element + "\n";
+            this.txtPosWords += element.value + "  ";
+            if(counter % 3 == 2){
+                this.txtPosWords += "\n";
+            }
+            counter++;
         });
     }
 
@@ -57,6 +100,7 @@ class Wordbundle{
         let isFull = this.wordboxes[this.index].inAnswer(key);
         if(isFull == 1){
             this.wordCalculate_v2(this.wordboxes[this.index]);
+            this.set_position_word(this.posWords);
             this.get_posWordsTxt();
             this.showPosWords = true;
             console.log(this.posWords);
@@ -177,7 +221,7 @@ class Wordbundle{
         }
         console.log(cue, greenIndex);    
         for(let i=this.posWords.length-1; i>=0; i--){
-            let posWord = this.posWords[i];
+            let posWord = this.posWords[i].value;
             let wCue = [];
             cue.forEach(element => {
                 wCue.push(posWord.charAt(element.order));
