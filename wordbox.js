@@ -29,21 +29,24 @@ class Wordbox{
 
         for(let j=0; j<this.nChar; j++){
             if(this.wordlist[j].isGray){
-                fill(128);
+                fill(58, 58, 60);
             }else if(this.wordlist[j].isGreen){
-                fill(0, 255, 0);
+                fill(97, 140, 85);
             }else if(this.wordlist[j].isYellow){
-                fill(128, 128, 0);
+                fill(178, 160, 76);
             }else fill(255);
             rect(this.x + j*(this.length + this.padding), this.y, this.length, this.length);
         }
 
         // textFont(this.font, 16);
         textAlign(CENTER);
+        noStroke();
         textSize(24);
-        fill(0);
         for(let j=0; j<this.wordlist.length; j++){
-            text(this.wordlist[j].value, (this.x + this.length/2) + j*(this.length + this.padding), this.y + this.length/2)
+            if(this.wordlist[j].isYellow || this.wordlist[j].isGreen || this.wordlist[j].isGray){
+                fill(255);
+            }else fill(0);
+            text(this.wordlist[j].value.toUpperCase(), (this.x + this.length/2) + j*(this.length + this.padding), this.y + this.length/2 + 9);
         }
     }
 

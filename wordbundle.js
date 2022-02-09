@@ -1,3 +1,5 @@
+let originX = 57 * screenWidth / 100;
+
 class Wordbundle{
     constructor(nRow, nChar, length, padding, x, y){
         this.nRow = nRow;
@@ -19,11 +21,14 @@ class Wordbundle{
     }
 
     init(){
+        let counter = 0;
         this.posList.slice().forEach(element => {
-            this.posWords.push(new WordProp(element));
+            this.posWords.push(new WordProp(element, originX + (counter % 3) * 79, height + 50));
+            counter++;
         });
         this.list.slice().forEach(element => {
-            this.posWords.push(new WordProp(element));
+            this.posWords.push(new WordProp(element, originX + (counter % 3) * 79, height + 50));
+            counter++;
         });
         // this.posWords = (this.posList.slice());
         // this.list.slice().forEach(element => {
@@ -58,28 +63,27 @@ class Wordbundle{
         }
     }
     set_position_word(wordprops){
-        let x = 60 * screenWidth / 100;
+        let x = originX;
         let y = 1 * screenHeight / 10;
 
         // iterate over each word
         for(let i=0; i<wordprops.length; i++){
             let word = wordprops[i];
             let wordWidth = textWidth(word.value);
-            word.tx = x;
-            word.ty = y;
             word.idx = i;
+            word.tx = originX + (word.idx % 3) * 79;
+            word.ty = y;
             // console.log("before : (x, y) : " + x + " " + y);
-            x += wordWidth + textWidth("  ");
             // console.log("after : (x, y) : " + x + " " + y);
 
             // look ahead the next word -> will it fit in the space? if not, line break
-            let nextWordWidth;
-            if(i+1 < wordprops.length){
-            nextWordWidth = textWidth(wordprops[i+1].value)
-            }else nextWordWidth = 0;
-            if(x > screenWidth - nextWordWidth){
+
+            //let nextWordWidth;
+            // if(i+1 < wordprops.length){
+            // nextWordWidth = textWidth(wordprops[i+1].value)
+            // }else nextWordWidth = 0;
+            if((word.idx % 3 == 2)){
                 y += 25 // line height, change later
-                x = 60 * screenWidth / 100;
             }
         }
     }

@@ -12,6 +12,7 @@ let wordbundle;
 function setup(){
     createCanvas(screenWidth, screenHeight);
     wordbundle = new Wordbundle(6, wlength, length, padding, x, y);
+    frameRate(60);
     
 }
 

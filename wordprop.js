@@ -1,10 +1,10 @@
 class WordProp{
-    constructor(word){
+    constructor(word, x, y){
         this.value = word;
         this.possibleValue = 0;
         this.score = 0;
-        this.x = 0;
-        this.y = 0;
+        this.x = x;
+        this.y = y;
         // tx, ty stand for target position
         this.tx = this.x;
         this.ty = this.y;
@@ -27,6 +27,7 @@ class WordProp{
     display(){
         fill(this.fcolor);
         noStroke();
+        textAlign(LEFT);
         text(this.value, this.x, this.y);
     }
 }
