@@ -74,7 +74,7 @@ class Wordbundle{
 
     set_position_word(wordprops){
         let x = originX;
-        let y = 68 * screenHeight / 100;
+        let y = 14 * screenHeight / 100;
 
         // iterate over each word
         for(let i=0; i<wordprops.length; i++){

@@ -30,11 +30,8 @@ function draw(){
     wordbundle.show();
     textSize(16);
     textAlign(CENTER);
-    text("Gain information : " + wordbundle.get_inf_gained_length() + " word(s)", 3 * width / 4, 12 * height / 100);
-    text("Possible answer : " + wordbundle.get_pos_word_length() + " word(s)", 3 * width / 4, 60 * height/100);
-    if(isMouse){
-        text("Mouse Pressed", 50, 20);
-    }
+    // text("Gain information : " + wordbundle.get_inf_gained_length() + " word(s)", 3 * width / 4, 12 * height / 100);
+    text("Possible answer : " + wordbundle.get_pos_word_length() + " word(s)", 3 * width / 4, 9 * height/100);
     if(answerMode){
         answerInputs.forEach(element => {
             element.draw();
