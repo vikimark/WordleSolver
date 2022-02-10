@@ -14,9 +14,12 @@ class Wordbox{
     }
 
     init(){
+        this.wordlist = [];
         for(let i=0; i<this.nChar; i++){
             this.wordlist.push(new WordChar('', i));
         }
+        this.wordlistIndex = 0;
+        this.answerIndex = 0;
     }
 
     draw(){
@@ -29,11 +32,11 @@ class Wordbox{
 
         for(let j=0; j<this.nChar; j++){
             if(this.wordlist[j].isGray){
-                fill(58, 58, 60);
+                fill(121, 124, 126);
             }else if(this.wordlist[j].isGreen){
-                fill(97, 140, 85);
+                fill(121, 168, 107);
             }else if(this.wordlist[j].isYellow){
-                fill(178, 160, 76);
+                fill(197, 181, 102);
             }else fill(255);
             rect(this.x + j*(this.length + this.padding), this.y, this.length, this.length);
         }
@@ -48,6 +51,12 @@ class Wordbox{
             }else fill(0);
             text(this.wordlist[j].value.toUpperCase(), (this.x + this.length/2) + j*(this.length + this.padding), this.y + this.length/2 + 9);
         }
+    }
+
+    isClick(){
+        if(mouseX >= this.x && mouseX <= this.x + this.nChar * (this.padding + this.length) && mouseY >= this.y && mouseY <= this.y + this.length){
+            return true;
+        }else return false;
     }
 
     input(key){

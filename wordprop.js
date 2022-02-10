@@ -26,6 +26,7 @@ class WordProp{
 
     display(){
         fill(this.fcolor);
+        textSize(18);
         noStroke();
         textAlign(LEFT);
         text(this.value, this.x, this.y);

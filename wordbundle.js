@@ -62,9 +62,19 @@ class Wordbundle{
             });
         }
     }
+
+    get_inf_gained_length(){
+        // undone 
+        return 0;
+    }
+
+    get_pos_word_length(){
+        return this.posWords.length;
+    }
+
     set_position_word(wordprops){
         let x = originX;
-        let y = 1 * screenHeight / 10;
+        let y = 68 * screenHeight / 100;
 
         // iterate over each word
         for(let i=0; i<wordprops.length; i++){
@@ -126,7 +136,6 @@ class Wordbundle{
             } else this.notWord = false;
             return false;  
         }
-        // index out of range
     }
 
     delete(answerMode){
@@ -170,6 +179,11 @@ class Wordbundle{
                 
             }
         }
+    }
+
+    txtWordCheck(word){
+        let bool = (this.posList.includes(word) || this.list.includes(word));
+        return bool;
     }
     
     wordCalculate(word, answer){
