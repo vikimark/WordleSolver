@@ -38,6 +38,7 @@ class Wordbox{
             }else if(this.wordlist[j].isYellow){
                 fill(197, 181, 102);
             }else fill(255);
+            noStroke();
             rect(this.x + j*(this.length + this.padding), this.y, this.length, this.length);
         }
 
